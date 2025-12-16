@@ -69,18 +69,6 @@ export default async function Home() {
 
       {/* Сетка разделов на белом фоне */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-12 relative z-10 pb-20">
-        {/* Кнопка для принудительного обновления данных */}
-        <div className="flex justify-end mb-4">
-          <form action="/api/revalidate" method="POST">
-            <button
-              type="submit"
-              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2"
-            >
-              <span>🔄</span>
-              Обновить данные с сервера
-            </button>
-          </form>
-        </div>
 
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
@@ -89,13 +77,6 @@ export default async function Home() {
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             {siteSettings.sectionsSubtitle}
           </p>
-          {/* Индикатор загрузки данных */}
-          <div className="mt-4 text-sm text-gray-500">
-            Данные загружены: {new Date().toLocaleTimeString()}
-            {sections.length === 0 && (
-              <span className="ml-2 text-amber-600">(загружаются fallback данные)</span>
-            )}
-          </div>
         </div>
 
         {sections.length === 0 ? (
@@ -174,39 +155,6 @@ export default async function Home() {
           </div>
         )}
 
-        {/* Статистика с градиентом */}
-        <div className="mt-24 bg-linear-to-r from-slate-900 to-gray-900 rounded-3xl text-white p-12 text-center shadow-2xl">
-          <h3 className="text-3xl font-bold mb-6">
-            Почему выбирают нашу платформу
-          </h3>
-          <p className="text-gray-300 text-lg max-w-3xl mx-auto mb-12">
-            Современный подход к обучению с акцентом на практическое применение знаний
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-4xl mx-auto">
-            <div className="text-center">
-              <div className="text-5xl font-bold mb-4 bg-linear-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                100%
-              </div>
-              <div className="text-xl font-medium mb-2">Актуальность</div>
-              <div className="text-gray-400">Все материалы обновляются регулярно</div>
-            </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold mb-4 bg-linear-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-                24/7
-              </div>
-              <div className="text-xl font-medium mb-2">Доступность</div>
-              <div className="text-gray-400">Учитесь в любое удобное время</div>
-            </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold mb-4 bg-linear-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent">
-                {sections.length}
-              </div>
-              <div className="text-xl font-medium mb-2">Направления</div>
-              <div className="text-gray-400">Комплексное покрытие тем</div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   )

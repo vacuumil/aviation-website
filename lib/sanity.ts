@@ -34,13 +34,6 @@ export function urlFor(source: SanityImageSource) {
   return builder.image(source)
 }
 
-interface SiteSettings {
-  title?: string
-  heroSubtitle?: string
-  sectionsTitle?: string
-  sectionsSubtitle?: string
-}
-
 // Используем authenticatedClient для настроек и разделов
 export async function getSettings() {
   const query = `*[_type == "settings"][0] {
