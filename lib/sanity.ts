@@ -51,11 +51,9 @@ export async function getSettings(): Promise<SiteSettings | null> {
   }`
 
   try {
-    return await authenticatedClient.fetch(query)
+    return await client.fetch(query) 
   } catch (error) {
     console.error('Error fetching settings:', error)
-    
-    // Fallback значения
     return {
       title: 'Безопасность в авиации',
       heroSubtitle: 'Профессиональные учебные материалы для студентов института гражданской авиации',
@@ -74,7 +72,7 @@ export async function getSections() {
   }`
 
   try {
-    return await authenticatedClient.fetch(query)
+    return await client.fetch(query)  
   } catch (error) {
     console.error('Error fetching sections:', error)
     return []

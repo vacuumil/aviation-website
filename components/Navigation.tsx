@@ -1,10 +1,16 @@
-// components/Navigation.tsx
 import Link from 'next/link'
 import { getSections } from '@/lib/sanity'
 import type { Section } from '@/types/sanity'
 
 export default async function Navigation() {
-  const sections = await getSections()
+  let sections: Section[] = []
+  
+  try {
+    sections = await getSections()
+  } catch (error) {
+    console.error('Navigation: Error loading sections', error)
+    // Можно оставить пустой массив, fallback сработает
+  }
   
   return (
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200/80 shadow-sm">
@@ -19,7 +25,7 @@ export default async function Navigation() {
             </div>
             <div>
               <div className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-                Безопасность в аваиции
+                Безопасность в авиации
               </div>
             </div>
           </Link>
@@ -37,7 +43,7 @@ export default async function Navigation() {
                 </Link>
               ))
             ) : (
-              // Fallback навигация если разделы не загрузились
+              // Fallback если разделы не загрузились
               <>
                 <Link href="/section/fires" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
                   Пожары
