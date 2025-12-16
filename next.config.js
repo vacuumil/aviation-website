@@ -1,16 +1,9 @@
 ﻿/** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
-  
-  // Отключаем турбопак для сборки на Vercel
   experimental: {
-    turbo: {
-      resolveAlias: {
-        // Явно указываем корневую директорию
-      }
-    }
+    turbo: false  // Отключаем турбопак
   },
-  
   images: {
     remotePatterns: [
       {
@@ -21,5 +14,4 @@ const nextConfig = {
     ],
   },
 }
-
 module.exports = nextConfig

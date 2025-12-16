@@ -4,14 +4,24 @@ import { Section } from '@/types/sanity'
 
 // Добавляем запрос для настроек
 async function getSettings() {
-  const query = `*[_type == "settings"][0] {
-    title,
-    heroSubtitle,
-    sectionsTitle,
-    sectionsSubtitle
-  }`
-  
-  return await client.fetch(query)
+  try {
+    const query = `*[_type == "settings"][0] {
+      title,
+      heroSubtitle,
+      sectionsTitle,
+      sectionsSubtitle
+    }`
+    
+    return await client.fetch(query)
+  } catch (error) {
+    console.error('Error fetching settings:', error)
+    // Возвращаем значения по умолчанию если ошибка
+    return {
+      heroSubtitle: 'Профессиональные учебные материалы для студентов института гражданской авиации',
+      sectionsTitle: 'Основные направления подготовки',
+      sectionsSubtitle: 'Изучите ключевые аспекты безопасности через структурированные учебные материалы'
+    }
+  }
 }
 
 async function getSections(): Promise<Section[]> {
