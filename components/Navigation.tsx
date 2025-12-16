@@ -27,9 +27,8 @@ export default async function Navigation() {
             </div>
             <div>
               <div className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-                Aviation Safety
+                Безопасность в авиации
               </div>
-              <div className="text-xs text-gray-500 font-medium">Институт ГА</div>
             </div>
           </Link>
           

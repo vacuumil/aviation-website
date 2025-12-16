@@ -1,26 +1,133 @@
+/* app/globals.css - ТОЛЬКО СВЕТЛАЯ ТЕМА */
 @import "tailwindcss";
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --primary: #1e40af;
+  --secondary: #0ea5e9;
+  --muted: #4b5563;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-feature-settings: "kern", "liga", "clig", "calt";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.content-wrapper {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .content-wrapper {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content-wrapper {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Улучшенная типографика для читаемого текста */
+.content-text {
+  color: #374151; /* gray-700 */
+  line-height: 1.75;
+}
+
+.content-text p {
+  margin-bottom: 1.5rem;
+}
+
+.content-text h2 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+.content-text h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: #1f2937;
+}
+
+.content-text ul, .content-text ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.content-text ul {
+  list-style-type: disc;
+}
+
+.content-text ol {
+  list-style-type: decimal;
+}
+
+.content-text li {
+  color: #374151;
+}
+
+.content-text strong {
+  font-weight: 600;
+  color: #111827;
+}
+
+.content-text a {
+  color: #2563eb;
+}
+
+.content-text a:hover {
+  text-decoration: underline;
+}
+
+/* Классы для консистентности */
+.page-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom-width: 1px;
+  border-bottom-color: #e5e7eb;
+}
+
+.page-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 1rem;
+}
+
+.page-subtitle {
+  font-size: 1.125rem;
+  color: #4b5563;
+}
+
+.section-card {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  border-width: 1px;
+  border-color: #e5e7eb;
+  overflow: hidden;
+}
+
+.section-card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }

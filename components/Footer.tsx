@@ -1,4 +1,4 @@
-import { Lock, Mail } from 'lucide-react'
+import { Lock } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -10,12 +10,8 @@ export default function Footer() {
               Aviation Safety Platform
             </h3>
             <p className="text-gray-400 max-w-md">
-              Образовательная платформа института гражданской авиации
+              Образовательная платформа института
             </p>
-            <div className="mt-4 text-sm text-gray-500">
-              <p>© {new Date().getFullYear()} Институт гражданской авиации</p>
-              <p className="mt-1">Кафедра экологии и безопасности</p>
-            </div>
           </div>
           
           <div className="flex flex-col items-center lg:items-end gap-4">
@@ -33,17 +29,6 @@ export default function Footer() {
               </div>
               <span className="group-hover:translate-x-1 transition-transform">→</span>
             </a>
-            
-            {/* Контактная информация */}
-            <div className="text-center lg:text-right">
-              <div className="flex items-center gap-2 text-gray-400 text-sm">
-                <Mail size={14} />
-                <span>support@civil-aviation.edu</span>
-              </div>
-              <p className="text-xs text-gray-500 mt-1">
-                Техническая поддержка: Пн-Пт 9:00-18:00
-              </p>
-            </div>
           </div>
         </div>
         
@@ -52,14 +37,6 @@ export default function Footer() {
             <div>
               <p className="font-medium text-gray-400 mb-1">Разделы обучения</p>
               <p>Пожары • Чрезвычайные ситуации • Образование • Защита</p>
-            </div>
-            <div>
-              <p className="font-medium text-gray-400 mb-1">Доступность</p>
-              <p>Круглосуточный доступ • Адаптивный дизайн • Без ограничений</p>
-            </div>
-            <div>
-              <p className="font-medium text-gray-400 mb-1">Безопасность</p>
-              <p>Защищённое соединение • Резервное копирование • Контроль доступа</p>
             </div>
           </div>
         </div>

@@ -182,38 +182,6 @@ export default function StudioLogin() {
               </div>
             </div>
           </div>
-
-          {/* Информационная панель */}
-          <div className="bg-gray-50 border-t border-gray-200 p-6">
-            <div className="space-y-3">
-              <div className="flex items-start gap-3">
-                <div className="shrink-0 w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <span className="text-blue-600 font-bold text-sm">1</span>
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-900 text-sm">
-                    Безопасный доступ
-                  </h4>
-                  <p className="text-xs text-gray-600">
-                    Пароль обновляется каждые 6 месяцев
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="shrink-0 w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                  <span className="text-green-600 font-bold text-sm">2</span>
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-900 text-sm">
-                    Автоматический выход
-                  </h4>
-                  <p className="text-xs text-gray-600">
-                    Сессия завершается через 8 часов
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Инструкция для преподавателя */}
