@@ -11,11 +11,11 @@ const token = process.env.SANITY_API_READ_TOKEN
 
 // Создаем два клиента: один для CDN (без токена), другой для запросов с токеном
 export const client = createClient({
-  projectId,
-  dataset,
-  apiVersion,
-  useCdn: process.env.NODE_ENV === 'production',
-  token: token || undefined,
+  projectId: '6jv9b90p',
+  dataset: 'production',
+  apiVersion: '2025-12-15',
+  useCdn: false, // ВЫКЛЮЧАЕМ CDN
+  token: process.env.SANITY_API_READ_TOKEN, // Токен обязателен
 })
 
 // Отдельный клиент для запросов, которые точно требуют свежих данных
@@ -42,7 +42,7 @@ interface SiteSettings {
 }
 
 // Используем authenticatedClient для настроек и разделов
-export async function getSettings(): Promise<SiteSettings | null> {
+export async function getSettings() {
   const query = `*[_type == "settings"][0] {
     title,
     heroSubtitle,
@@ -51,11 +51,12 @@ export async function getSettings(): Promise<SiteSettings | null> {
   }`
 
   try {
-    return await client.fetch(query) 
+    return await client.fetch(query, {}, {
+      cache: 'no-store', // Отключаем кэширование
+    })
   } catch (error) {
     console.error('Error fetching settings:', error)
     return {
-      title: 'Безопасность в авиации',
       heroSubtitle: 'Профессиональные учебные материалы для студентов института гражданской авиации',
       sectionsTitle: 'Основные направления подготовки',
       sectionsSubtitle: 'Изучите ключевые аспекты безопасности через структурированные учебные материалы'
@@ -72,7 +73,9 @@ export async function getSections() {
   }`
 
   try {
-    return await client.fetch(query)  
+    return await client.fetch(query, {}, {
+      cache: 'no-store', // Отключаем кэширование
+    })
   } catch (error) {
     console.error('Error fetching sections:', error)
     return []

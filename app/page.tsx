@@ -1,10 +1,13 @@
-// app/page.tsx
+// Отключаем статическую генерацию - ВАЖНО для обновления данных
+export const dynamic = 'force-dynamic'
+export const revalidate = 0 // 0 секунд - всегда свежие данные
+
 import { getSettings, getSections } from '@/lib/sanity'
 import Link from 'next/link'
 import { Section } from '@/types/sanity'
 
 export default async function Home() {
-  // Используем Promise.all для параллельной загрузки
+  // Загружаем данные с отключенным кэшированием
   const [settingsData, sectionsData] = await Promise.all([
     getSettings(),
     getSections()
@@ -47,18 +50,6 @@ export default async function Home() {
               {siteSettings.heroSubtitle}
             </p>
             
-            <div className="flex flex-wrap justify-center gap-4 mb-16">
-              <div className="px-5 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium border border-white/30">
-                🔥 Актуальные материалы
-              </div>
-              <div className="px-5 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium border border-white/30">
-                📊 Структурированные разделы
-              </div>
-              <div className="px-5 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium border border-white/30">
-                🚀 Постоянные обновления
-              </div>
-            </div>
-            
             <div className="animate-bounce">
               <div className="text-sm text-blue-200 font-medium">Изучайте материалы ниже</div>
               <div className="text-2xl mt-2">↓</div>
@@ -78,6 +69,19 @@ export default async function Home() {
 
       {/* Сетка разделов на белом фоне */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-12 relative z-10 pb-20">
+        {/* Кнопка для принудительного обновления данных */}
+        <div className="flex justify-end mb-4">
+          <form action="/api/revalidate" method="POST">
+            <button
+              type="submit"
+              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2"
+            >
+              <span>🔄</span>
+              Обновить данные с сервера
+            </button>
+          </form>
+        </div>
+
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
             {siteSettings.sectionsTitle}
@@ -85,6 +89,13 @@ export default async function Home() {
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             {siteSettings.sectionsSubtitle}
           </p>
+          {/* Индикатор загрузки данных */}
+          <div className="mt-4 text-sm text-gray-500">
+            Данные загружены: {new Date().toLocaleTimeString()}
+            {sections.length === 0 && (
+              <span className="ml-2 text-amber-600">(загружаются fallback данные)</span>
+            )}
+          </div>
         </div>
 
         {sections.length === 0 ? (
@@ -96,9 +107,29 @@ export default async function Home() {
             <h3 className="text-2xl font-bold text-gray-900 mb-3">
               Разделы временно недоступны
             </h3>
-            <p className="text-gray-600 max-w-md mx-auto">
-              Пожалуйста, проверьте подключение к базе данных или попробуйте позже.
+            <p className="text-gray-600 max-w-md mx-auto mb-6">
+              Проверьте подключение к базе данных или попробуйте обновить страницу.
             </p>
+            <div className="space-y-4 max-w-md mx-auto">
+              <div className="grid grid-cols-2 gap-4">
+                <Link href="/section/fires" className="bg-blue-50 hover:bg-blue-100 p-4 rounded-lg border border-blue-200 text-center">
+                  <div className="text-lg font-medium text-blue-700">Пожары</div>
+                  <div className="text-sm text-blue-600 mt-1">Материалы по пожарной безопасности</div>
+                </Link>
+                <Link href="/section/emergencies" className="bg-amber-50 hover:bg-amber-100 p-4 rounded-lg border border-amber-200 text-center">
+                  <div className="text-lg font-medium text-amber-700">Чрезвычайные ситуации</div>
+                  <div className="text-sm text-amber-600 mt-1">Действия в ЧС</div>
+                </Link>
+                <Link href="/section/education" className="bg-emerald-50 hover:bg-emerald-100 p-4 rounded-lg border border-emerald-200 text-center">
+                  <div className="text-lg font-medium text-emerald-700">Образование</div>
+                  <div className="text-sm text-emerald-600 mt-1">Учебные материалы</div>
+                </Link>
+                <Link href="/section/protection" className="bg-violet-50 hover:bg-violet-100 p-4 rounded-lg border border-violet-200 text-center">
+                  <div className="text-lg font-medium text-violet-700">Защита</div>
+                  <div className="text-sm text-violet-600 mt-1">Средства защиты</div>
+                </Link>
+              </div>
+            </div>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
