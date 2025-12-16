@@ -36,8 +36,10 @@ export default async function SectionPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const section = await getSection(slug)
-  const topics = await getTopics(slug)
+  const [section, topics] = await Promise.all([
+    getSection(slug),
+    getTopics(slug)
+  ])
 
   if (!section) {
     notFound()
